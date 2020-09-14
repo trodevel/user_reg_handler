@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 13808 $ $Date:: 2020-09-13 #$ $Author: serge $
+// $Revision: 13811 $ $Date:: 2020-09-14 #$ $Author: serge $
 
 #include "handler.h"                // self
 
@@ -65,7 +65,7 @@ generic_protocol::BackwardMessage* Handler::handle( session_manager::user_id_t /
     if( user_reg_email_->register_new_user(
             0,
             r.lead.email.email,
-            "xxx",
+            r.password,
             & user_id,
             & error_msg
             ) )
