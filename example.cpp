@@ -49,7 +49,9 @@ bool read_config(
     }
     catch( std::exception & e )
     {
-        return false;
+        std::cerr << "cannot read config file '" << filename << "' : " << e.what() << "\n";
+
+        exit( EXIT_FAILURE );
     }
 }
 
@@ -118,6 +120,21 @@ bool register_user_1(
     user_reg_protocol::initialize( req.get(), u, "secret" );
 
     auto resp = h->handle( 0, * req.get() );
+
+    if( typeid( * resp ) == typeid( user_reg_protocol::RegisterUserResponse ) )
+    {
+        return true;
+    }
+
+    if( typeid( * resp ) == typeid( generic_protocol::ErrorResponse ) )
+    {
+        * error_msg = "error occurred: " + ( dynamic_cast<generic_protocol::ErrorResponse*>( resp ) )->descr;
+        return false;
+    }
+
+    * error_msg = "unknown response: " + std::string( typeid( * resp ).name() );
+
+    return false;
 }
 
 void test_kernel( const std::string & name, const std::string & config_file, const std::string & subject, const std::string & body_template )
@@ -146,7 +163,7 @@ void test_01_reg_ok_1()
 
 int main()
 {
-    user_reg_handler::Handler h;
+    test_01_reg_ok_1();
 
     return 0;
 }
