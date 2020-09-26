@@ -85,7 +85,7 @@ void init(
             config_file );
 
     config2.subject         = subject;
-    config2.body_template   = body_template;
+    config2.body_template_filename   = body_template;
 
     ure->init( config2, ur );
 
@@ -158,7 +158,7 @@ void test_kernel( const std::string & name, const std::string & config_file, con
 
 void test_01_reg_ok_1()
 {
-    test_kernel( "test_01_reg_ok_1", "config_1.cfg", "Confirm your registration", "You registration key - $REGISTRATION_KEY" );
+    test_kernel( "test_01_reg_ok_1", "config_1.cfg", "Confirm your registration", "templ_01.txt" );
 }
 
 int main()
