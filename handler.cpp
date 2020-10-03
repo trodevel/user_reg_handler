@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 13811 $ $Date:: 2020-09-14 #$ $Author: serge $
+// $Revision: 13924 $ $Date:: 2020-10-03 #$ $Author: serge $
 
 #include "handler.h"                // self
 
@@ -32,7 +32,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "user_reg_protocol/protocol.h"    // user_reg_protocol::
 
-#include "session_manager/manager.h" // user_reg_email::UserRegEmail
 
 #define MODULENAME      "user_reg_handler::Handler"
 
@@ -78,8 +77,6 @@ generic_protocol::BackwardMessage* Handler::handle( session_manager::user_id_t /
 
 generic_protocol::BackwardMessage* Handler::handle( session_manager::user_id_t /*session_user_id*/, const user_reg_protocol::ConfirmRegistrationRequest & r )
 {
-    user_reg::user_id_t user_id;
-
     std::string error_msg;
 
     if( user_reg_email_->confirm_registration( r.registration_key, & error_msg ) )
